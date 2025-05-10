@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La mulți ani, Mama!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff5f7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #e84393;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            animation: slideUp 1.5s ease;
+        }
+        
+        .heart {
+            font-size: 100px;
+            color: #e84393;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .flower-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .flower {
+            margin: 10px;
+            animation: swing 3s infinite ease-in-out;
+        }
+        
+        .button {
+            background-color: #e84393;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            animation: fadeIn 3s ease;
+        }
+        
+        .button:hover {
+            background-color: #d63384;
+            transform: scale(1.05);
+        }
+        
+        .message-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            animation: slideUp 2s ease;
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #e84393;
+            opacity: 0.6;
+            animation-name: float, fadeOut;
+            animation-duration: 10s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes swing {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-20px); }
+            75% { transform: translateY(-300px) translateX(30px); }
+            100% { transform: translateY(-400px) translateX(0); }
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floating-hearts"></div>
+    
+    <div class="container">
+        <h1>Felicitari de Ziua Mamei!</h1>
+        
+        <div class="heart">❤️</div>
+        
+        <p>Dragă mamă, ești cea mai minunată ființă din lume!</p>
+        
+        <div class="flower-container">
+            <div class="flower">🌺</div>
+            <div class="flower">🌷</div>
+            <div class="flower">🌹</div>
+            <div class="flower">🌻</div>
+            <div class="flower">🌸</div>
+        </div>
+        
+        <p>Apasă butonul pentru a vedea un mesaj special:</p>
+        
+        <button class="button" id="showMessage">Arată mesajul</button>
+        
+        <div class="message-box" id="messageBox">
+            <h2>Din toată inima!</h2>
+            <p>Ești lumina care îmi ghidează pașii, îți mulțumesc pentru toată dragostea, răbdarea și sacrificiile tale!</p>
+            <p>Sunt recunoscător/recunoscătoare pentru toate momentele în care m-ai susținut și mi-ai fost alături!</p>
+            <p>Te iubesc, mami! ❤️</p>
+            <p>(Pentru Ana Dogot)</p>
+        </div>
+    </div>
+    
+    <script>
+        // Show message when button is clicked
+        document.getElementById('showMessage').addEventListener('click', function() {
+            document.getElementById('messageBox').classList.add('visible');
+            createFloatingHearts(20);
+        });
+        
+        // Create floating hearts
+        function createFloatingHearts(num) {
+            const container = document.getElementById('floating-hearts');
+            
+            for (let i = 0; i < num; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                
+                // Random position
+                const startPosX = Math.random() * window.innerWidth;
+                heart.style.left = startPosX + 'px';
+                heart.style.bottom = '0';
+                
+                // Random delay
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }
+        }
+        
+        // Initial hearts
+        createFloatingHearts(10);
+        
+        // Add hearts periodically
+        setInterval(() => {
+            createFloatingHearts(2);
+        }, 3000);
+    </script>
+</body>
+</html>
